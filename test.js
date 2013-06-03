@@ -1,8 +1,5 @@
-var assert = require('assert')
-var paramify = require('./index.js')
-
 var http = require('http')
-var paramify = require('./index')
+var paramify = require('paramify')
 
 http.createServer(function (req, res) {
 
