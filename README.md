@@ -1,5 +1,5 @@
 # SYNOPSIS
-Parses tokens out of urls and returns an object with their values
+Parses urls so you can "route"
 
 # MOTIVATION
 For when you want url parameters but not a big bloated router
