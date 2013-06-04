@@ -32,8 +32,8 @@ function intro(params, res) {
 function showtimes(params, res) {
 
   var message = [
-    'Show starts at', match.params.start, 
-    'and ends at', match.params.end
+    'Show starts at', params.start, 
+    'and ends at', params.end
   ].join(' ') + '\n'
 
   res.end(message)
