@@ -18,7 +18,7 @@ http.createServer(function (req, res) {
 
     intro(match.params, res)
   }
-  else if (match('showtimes/:start/:end'))
+  else if (match('showtimes/:start/:end')) {
 
     showtimes(match.params, res)
   }
@@ -49,7 +49,7 @@ http://localhost:1337/showtimes/10:00AM/8:30PM
 
 The server would respond with
 ```
-Show starts at 10:00 and ends at 8:30
+Show starts at 10:00AM and ends at 8:30PM
 ```
 
 Given the following url
