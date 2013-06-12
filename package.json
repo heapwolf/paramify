@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "",
+  "repository": {
+    "url": "git://github.com/hij1nx/paramify.git"
+  },
   "author": "",
   "license": "BSD"
 }
