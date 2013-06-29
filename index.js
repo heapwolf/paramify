@@ -21,26 +21,29 @@ function regify(vurl) {
 
 function paramify(url) {
   try { url = decodeURI(url) } catch($) {}
-  paramify.url = url
-  return paramify
+
+  function match (vurl) {
+
+    var reg = regify(vurl)
+    var matches = url.match(reg.exp)
+
+    if (!matches) {
+      return false
+    }
+
+    var params = {}
+
+    for (var i = 0; i < reg.keys.length; i++) {
+      params[reg.keys[i].name] = matches[i + 1]
+    }
+
+    match.params = params
+
+    return true
+  }
+
+  return { match: match }
 }
 
 module.exports = paramify
 
-paramify.match = function(vurl) {
-
-  var reg = regify(vurl)
-  var matches = paramify.url.match(reg.exp)
-
-  if (!matches) {
-    return false
-  }
-
-  paramify.match.params = {}
-
-  for (var i = 0; i < reg.keys.length; i++) {
-    paramify.match.params[reg.keys[i].name] = matches[i + 1]
-  }
-
-  return true
-}
