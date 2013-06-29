@@ -11,7 +11,7 @@ var paramify = require('paramify')
 
 http.createServer(function (req, res) {
 
-  var match = paramify(req.url).match
+  var match = paramify(req.url)
   res.writeHead(200, {'Content-Type': 'text/plain'})
 
   if (match('intro/:greeting')) {

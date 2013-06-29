@@ -42,7 +42,8 @@ function paramify(url) {
     return true
   }
 
-  return { match: match }
+  match.match = match
+  return match
 }
 
 module.exports = paramify
