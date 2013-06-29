@@ -1,5 +1,5 @@
 var http = require('http')
-var paramify = require('paramify')
+var paramify = require('..')
 
 http.createServer(function (req, res) {
 
