@@ -1,4 +1,5 @@
 
+var pathToRegexp = require('path-to-regexp')
 var cache = {}
 
 function regify(vurl) {
@@ -7,37 +8,15 @@ function regify(vurl) {
     return cache[vurl]
   }
 
-  var matches
-  var capture
-  var length
-  var i = 0
-  var last = 0
-  var out = ''
-  var key = vurl
-
-  cache[key] = { captures: [] }
-
-  while (matches = vurl.substr(last).match(/[^\w\d\- %@&]*\*[^\w\d\- %@&]*/)) {
-    last = matches.index + matches[0].length
-    matches[0] = matches[0].replace(/^\*/, '([_\.\(\)!\\ %@&a-zA-Z0-9-]+)')
-    out += vurl.substr(0, matches.index) + matches[0]
+  if (vurl.charAt(0) != '/') {
+    vurl = '/' + vurl
   }
 
-  vurl = out += vurl.substr(last)
+  var reg = cache[vurl] = {}
+  reg.keys = []
+  reg.exp = pathToRegexp(vurl, reg.keys)
 
-  var captures = vurl.match(/:([^\/]+)/ig)
-
-  if (captures) {
-    length = captures.length
-    for (; i < length; i++) {
-      cache[key].captures.push(captures[i].slice(1))
-      vurl = vurl.replace(captures[i], '([._:!\\sa-zA-Z0-9-]+)')
-    }
-  }
-
-  cache[key].regexp = new RegExp(vurl)
-
-  return cache[key]
+  return reg
 }
 
 function paramify(url) {
@@ -50,10 +29,8 @@ module.exports = paramify
 
 paramify.match = function(vurl) {
 
-  var ourl = regify(vurl)
-  var i = 1
-  var j = 0
-  var matches = paramify.url.match(ourl.regexp)
+  var reg = regify(vurl)
+  var matches = paramify.url.match(reg.exp)
 
   if (!matches) {
     return false
@@ -61,8 +38,8 @@ paramify.match = function(vurl) {
 
   paramify.match.params = {}
 
-  for (; i < matches.length; i++, j++) {
-    paramify.match.params[ourl.captures[j]] = matches[i]
+  for (var i = 0; i < reg.keys.length; i++) {
+    paramify.match.params[reg.keys[i].name] = matches[i + 1]
   }
 
   return true
