@@ -20,11 +20,10 @@ test('multiple named params', function (t) {
 })
 
 test('globbing matches', function (t) {
-  t.plan(4)
+  t.plan(3)
 
   var match = paramify('/files/mydir/path/to/file.txt')
   t.assert(match('/files/:root/*'))
   t.equal(match.params.root, 'mydir')
-  t.equal(match.params[0], '/files/mydir/path/to/file.txt')
-  t.equal(match.params[1], 'path/to/file.txt')
+  t.equal(match.params[0], 'path/to/file.txt')
 })
