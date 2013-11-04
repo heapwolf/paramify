@@ -31,10 +31,15 @@ function paramify(url) {
       return false
     }
 
-    var params = {}
+    var params = []
 
-    for (var i = 0; i < reg.keys.length; i++) {
-      params[reg.keys[i].name] = matches[i + 1]
+    for (var i = 0; i < matches.length; i++) {
+      var key = reg.keys[i - 1]
+      if (key) {
+        params[key.name] = matches[i]
+      } else {
+        params.push(matches[i])
+      }
     }
 
     match.params = params
