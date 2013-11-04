@@ -6,6 +6,7 @@ For when you want url parameters but not a big bloated router
 
 # USAGE
 ```js
+var fs = require('fs')
 var http = require('http')
 var paramify = require('paramify')
 
@@ -22,6 +23,11 @@ http.createServer(function (req, res) {
 
     showtimes(match.params, res)
   }
+  else if (match('files/*')) {
+  
+    serveFile(match.params, res)
+  }
+  
 }).listen(1337, '127.0.0.1')
 
 function intro(params, res) {
@@ -38,6 +44,13 @@ function showtimes(params, res) {
 
   res.end(message)
 }
+
+function serveFile(params, res) {
+  // match.params contains numeric keys for any
+  // path components matched with *
+  fs.createReadStream(__dirname + '/static/' + params[1]).pipe(res)
+}
+
 
 console.log('Server running at http://127.0.0.1:1337/')
 ```
@@ -61,3 +74,10 @@ The server would respond with
 ```
 Greeting was "Hello world!"
 ```
+
+Given the following url
+```
+http://localhost:1337/files/users/1/description.txt
+```
+
+The server would respond with the contents of `static/users/1/description.txt`.
