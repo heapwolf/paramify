@@ -48,7 +48,7 @@ function showtimes(params, res) {
 function serveFile(params, res) {
   // match.params contains numeric keys for any
   // path components matched with *
-  fs.createReadStream(__dirname + '/static/' + params[1]).pipe(res)
+  fs.createReadStream(__dirname + '/static/' + params[0]).pipe(res)
 }
 
 

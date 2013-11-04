@@ -33,7 +33,7 @@ function paramify(url) {
 
     var params = []
 
-    for (var i = 0; i < matches.length; i++) {
+    for (var i = 1; i < matches.length; i++) {
       var key = reg.keys[i - 1]
       if (key) {
         params[key.name] = matches[i]
