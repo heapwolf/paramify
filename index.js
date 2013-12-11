@@ -3,16 +3,18 @@ var pathToRegexp = require('path-to-regexp')
 var cache = {}
 
 function regify(vurl) {
+  var re = vurl instanceof RegExp
+  var key = re ? '$$' + vurl.source : vurl
 
-  if (cache[vurl]) {
-    return cache[vurl]
+  if (cache[key]) {
+    return cache[key]
   }
 
-  if (vurl.charAt(0) != '/') {
+  if (!re && vurl.charAt(0) != '/') {
     vurl = '/' + vurl
   }
 
-  var reg = cache[vurl] = {}
+  var reg = cache[key] = {}
   reg.keys = []
   reg.exp = pathToRegexp(vurl, reg.keys)
 

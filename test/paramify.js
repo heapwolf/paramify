@@ -27,3 +27,16 @@ test('globbing matches', function (t) {
   t.equal(match.params.root, 'mydir')
   t.equal(match.params[0], 'path/to/file.txt')
 })
+
+test('regex matches', function (t) {
+  t.plan(3)
+
+  var match = paramify('/files/mydir/path/to/file.txt')
+  t.assert(match(/^\/files(\/.*)?/))
+
+  match = paramify('/files')
+  t.assert(match(/^\/files(\/.*)?/))
+
+  match = paramify('/file')
+  t.assert(!match(/^\/files(\/.*)?/))
+})
