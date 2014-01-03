@@ -40,3 +40,13 @@ test('regex matches', function (t) {
   match = paramify('/file')
   t.assert(!match(/^\/files(\/.*)?/))
 })
+
+test('regex fail to match', function (t) {
+  t.plan(2)
+
+  var match = paramify('/profile')
+  t.assert(!match(/^\/xprofile/))
+
+  match = paramify('/@username')
+  t.assert(!match(/^\/(xprofile|@#(.*?))/))
+})
