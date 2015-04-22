@@ -50,3 +50,12 @@ test('regex fail to match', function (t) {
   match = paramify('/@username')
   t.assert(!match(/^\/(xprofile|@#(.*?))/))
 })
+
+test('encoded paths', function(t) {
+  t.plan(3)
+  
+  var match = paramify('/@example%2ftest')
+  t.assert(match('/@:first/:second'))
+  t.equal(match.params.first, 'example')
+  t.equal(match.params.second, 'test')
+})

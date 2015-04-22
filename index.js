@@ -23,6 +23,7 @@ function regify(vurl) {
 
 function paramify(url) {
   try { url = decodeURI(url) } catch($) {}
+  try { url = decodeURIComponent(url) } catch($) {}
 
   function match (vurl) {
 
