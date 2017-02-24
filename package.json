@@ -1,7 +1,7 @@
 {
   "name": "paramify",
   "version": "0.1.2",
-  "description": "",
+  "description": "Parameterized routes without a big bloated router, e.g. 'showtimes/:start/:end' and 'files/*'",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.js"
