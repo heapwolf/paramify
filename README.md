@@ -1,4 +1,4 @@
-[![build-status](https://www.codeship.io/projects/d3823ea0-4c7c-0131-4b68-527aab6d00bd/status)](https://www.codeship.io/projects/11258)
+[![development sponsored by voltra.co](https://img.shields.io/badge/Development%20sponsored%20by-Voltra.co-yellow.svg)](https://voltra.co/)
 
 # SYNOPSIS
 Parses urls so you can "route"
